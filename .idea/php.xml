@@ -109,6 +109,7 @@
       <path value="$PROJECT_DIR$/vendor/sonata-project/block-bundle" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/admin-bundle" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/datagrid-bundle" />
+      <path value="$PROJECT_DIR$/vendor/ninsuo/symfony-collection" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

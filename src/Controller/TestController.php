@@ -2,18 +2,54 @@
 
 namespace App\Controller;
 
+use App\Entity\Question;
+use App\Entity\Option;
+use App\Form\Type\QuestionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class TestController extends AbstractController
 {
     /**
-     * @Route("/test", name="test")
+     * @Route("/tests", methods={"GET"}, name="show_tests")
      */
-    public function index()
+    public function showAction()
     {
         return $this->render('test/index.html.twig', [
-            'controller_name' => 'TestController',
+            'controller_name' => 'TestController'
         ]);
+    }
+
+  /**
+   * @Route("/tests/new", methods={"GET"}, name="new_test")
+   */
+    public function newAction(Request $request)
+    {
+
+      $question = new Question();
+
+      // dummy code - this is here just so that the Task has some tags
+      // otherwise, this isn't an interesting example
+      $option = new Option();
+      $option->setText('text1');
+      $question->getOptions()->add($option);
+      $option2 = new Option();
+      $option2->setText('text2');
+      $question->getOptions()->add($option2);
+      // end dummy code
+
+      $form = $this->createForm(QuestionType::class, $question);
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid()) {
+        // ... maybe do some form processing, like saving the Task and Tag objects
+      }
+
+      return $this->render('test/new.html.twig', array(
+        'form' => $form->createView(),
+      ));
     }
 }
