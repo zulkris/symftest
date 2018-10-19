@@ -17,13 +17,25 @@ class OptionType extends AbstractType //implements FormTypeInterface
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $builder->add('text')->add('is_right');
+    $builder->add('text')
+      ->add('is_right');
+
   }
 
   public function configureOptions(OptionsResolver $resolver)
   {
     $resolver->setDefaults(array(
       'data_class' => Option::class,
+
+      // start jquery_collection works
+      'allow_add' => true,
+      'allow_remove' => true,
+      'prototype' => true,
+      'attr' => array(
+        'class' => 'my-selector',
+      ),
+      // end jquery_collection works
+
     ));
   }
 }

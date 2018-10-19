@@ -23,7 +23,6 @@ class QuestionType extends AbstractType //implements FormTypeInterface
     $builder->add('options', CollectionType::class, array(
       'entry_type' => OptionType::class,
       'entry_options' => array('label' => false),
-
     ));
   }
 

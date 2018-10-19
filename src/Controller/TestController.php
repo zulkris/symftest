@@ -40,6 +40,7 @@ class TestController extends AbstractController
       $question->getOptions()->add($option2);
       // end dummy code
 
+
       $form = $this->createForm(QuestionType::class, $question);
 
       $form->handleRequest($request);
