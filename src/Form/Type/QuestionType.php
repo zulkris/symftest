@@ -18,11 +18,17 @@ class QuestionType extends AbstractType //implements FormTypeInterface
 {
   public function buildForm(FormBuilderInterface $builder, array $options)
   {
-    $builder->add('title');
-
-    $builder->add('options', CollectionType::class, array(
-      'entry_type' => OptionType::class,
-      'entry_options' => array('label' => false),
+    $builder->add('title')
+		->add('type')
+      	->add('options', CollectionType::class, array(
+          'entry_type' => OptionType::class,
+		  'entry_options' => array('label' => false),
+			'allow_add' => true,
+			'allow_delete' => true,
+			'prototype' => true,
+			'attr' => array(
+				'class' => 'my-selector',
+			),
     ));
   }
 
@@ -32,4 +38,9 @@ class QuestionType extends AbstractType //implements FormTypeInterface
       'data_class' => Question::class,
     ));
   }
+
+	public function getBlockPrefix()
+	{
+		return 'QuestionType';
+	}
 }

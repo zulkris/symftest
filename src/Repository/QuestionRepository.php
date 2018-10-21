@@ -22,7 +22,7 @@ class QuestionRepository extends ServiceEntityRepository
 //    /**
 //     * @return Question[] Returns an array of Question objects
 //     */
-    /*
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('q')
@@ -34,9 +34,9 @@ class QuestionRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
 
-    /*
+
+
     public function findOneBySomeField($value): ?Question
     {
         return $this->createQueryBuilder('q')
@@ -46,5 +46,5 @@ class QuestionRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }

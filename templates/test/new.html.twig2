@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}New Test creation{% endblock %}
+
+{% block body %}
+
+    {% form_theme form 'jquery.collection.html.twig' %}
+    {{ form_widget(form.options) }}
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('.my-selector').collection();
+    </script>
+{% endblock %}

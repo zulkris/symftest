@@ -4,8 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Question;
 use App\Entity\Option;
+use App\Form\Type\OptionType;
 use App\Form\Type\QuestionType;
+use Sonata\CoreBundle\Form\Type\BooleanType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormFactoryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,16 +48,21 @@ class TestController extends AbstractController
       // end dummy code
 
 
-      $form = $this->createForm(QuestionType::class, $question);
 
-      $form->handleRequest($request);
+		$form = $this->createForm(QuestionType::class, $question);
+		$form->handleRequest($request);
+
+		$formTest = $this->createFormBuilder()
+		$formTest->handleRequest($request);
 
       if ($form->isSubmitted() && $form->isValid()) {
         // ... maybe do some form processing, like saving the Task and Tag objects
       }
 
       return $this->render('test/new.html.twig', array(
+
         'form' => $form->createView(),
+
       ));
     }
 }

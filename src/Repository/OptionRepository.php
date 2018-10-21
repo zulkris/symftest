@@ -22,7 +22,7 @@ class OptionRepository extends ServiceEntityRepository
 //    /**
 //     * @return Option[] Returns an array of Option objects
 //     */
-    /*
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('o')
@@ -34,9 +34,9 @@ class OptionRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
 
-    /*
+
+
     public function findOneBySomeField($value): ?Option
     {
         return $this->createQueryBuilder('o')
@@ -46,5 +46,5 @@ class OptionRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }
