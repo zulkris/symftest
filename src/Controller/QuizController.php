@@ -12,14 +12,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-class RootController extends AbstractController
+class QuizController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      */
     public function showRoot()
     {
 
-        return $this->render('quiz/index.html.twig', []);
+        return $this->render('quizhome/index.html.twig', []);
     }
 }

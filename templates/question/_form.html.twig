@@ -1,0 +1,75 @@
+
+
+
+
+
+        {# render the task's only field: description #}
+        {{ form_row(form.title) }}
+        {{ form_row(form.type) }}
+
+        <h3>Options</h3>
+        <ul class="options" data-prototype="{{ form_widget(form.options.vars.prototype)|e('html_attr') }}">
+            {# iterate over each existing option and render its only field: name #}
+            {% for option in form.options %}
+                <li>{{ form_row(option) }}</li>
+
+            {% endfor %}
+        </ul>
+
+
+
+
+<script>
+    function addOptionForm($collectionHolder, $newLinkLi) {
+        // Get the data-prototype explained earlier
+        var prototype = $collectionHolder.data('prototype');
+
+        // get the new index
+        var index = $collectionHolder.data('index');
+
+        var newForm = prototype;
+        // You need this only if you didn't set 'label' => false in your tags field in TaskType
+        // Replace '__name__label__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        // newForm = newForm.replace(/__name__label__/g, index);
+
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        newForm = newForm.replace(/__name__/g, index);
+
+        // increase the index with one for the next item
+        $collectionHolder.data('index', index + 1);
+
+        // Display the form in the page in an li, before the "Add a tag" link li
+        var $newFormLi = $('<li></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+    }
+
+
+
+
+    var $collectionHolder;
+
+    // setup an "add a tag" link
+    var $addOptionButton = $('<button type="button" class="add_option_link">Add an Option</button>');
+    //var $deleteOptionButton = $('<button type="button" class="delete_option_link">Add an Option</button>');
+    var $newLinkLi = $('<li></li>').append($addOptionButton);
+
+    jQuery(document).ready(function() {
+        // Get the ul that holds the collection of tags
+        $collectionHolder = $('ul.options');
+
+        // add the "add a tag" anchor and li to the tags ul
+        $collectionHolder.append($newLinkLi);
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addOptionButton.on('click', function(e) {
+            // add a new tag form (see next code block)
+            addOptionForm($collectionHolder, $newLinkLi);
+        });
+    });
+</script>
+

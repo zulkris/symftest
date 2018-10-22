@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Question!{% endblock %}
+
+
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Quiz Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                <li class="breadcrumb-item active">New Question</li>
+            </ol>
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+    {%  include 'question/_form.html.twig' %}
+
+    <input type="submit" value="Create New">
+    {{ form_end(form) }}
+
+
+{% endblock %}
