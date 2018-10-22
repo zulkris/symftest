@@ -29,18 +29,17 @@ class Question
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Test", inversedBy="question_id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Test", inversedBy="questions")
      */
     private $test_id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Option", mappedBy="question_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Option", mappedBy="question_id", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $options;
 
     public function __construct()
     {
-        $this->test_id = new ArrayCollection();
         $this->options = new ArrayCollection();
     }
 
@@ -74,33 +73,19 @@ class Question
         return $this;
     }
 
-    /**
-     * @return Collection|Test[]
-     */
-    public function getTestId(): Collection
+
+    public function getTestId(): ?int
     {
         return $this->test_id;
     }
 
-    public function addTestId(Test $testId): self
+    public function setTestId($testId): self
     {
-        if (!$this->test_id->contains($testId)) {
-            $this->test_id[] = $testId;
-        }
-
+        $this->test_id = $testId;
         return $this;
     }
 
-    public function removeTestId(Test $testId): self
-    {
-        if ($this->test_id->contains($testId)) {
-            $this->test_id->removeElement($testId);
-        }
-
-        return $this;
-    }
-
-    /**
+     /**
      * @return Collection|Option[]
      */
     public function getOptions(): Collection
@@ -112,7 +97,7 @@ class Question
     {
         if (!$this->options->contains($option)) {
             $this->options[] = $option;
-            $option->setQuestionId($this);
+            $option->setQuestionId($this->getId());
         }
 
         return $this;
@@ -130,5 +115,6 @@ class Question
 
         return $this;
     }
+
 
 }

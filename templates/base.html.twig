@@ -3,9 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}HomePage{% endblock %}</title>
-        {% block stylesheets %}
 
-        {% endblock %}
 
         <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css" />
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
@@ -21,11 +19,15 @@
     <div class="container" style="padding-top: 50px;">
 
 
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-
+        {% block body %}
 
         {% endblock %}
+
     </div>
+
+    {% block javascripts %}
+
+
+    {% endblock %}
     </body>
 </html>

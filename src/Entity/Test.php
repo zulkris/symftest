@@ -24,13 +24,13 @@ class Test
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Question", mappedBy="test_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="test_id", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $question_id;
+    private $questions;
 
     public function __construct()
     {
-        $this->question_id = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,28 +53,30 @@ class Test
     /**
      * @return Collection|Question[]
      */
-    public function getQuestionId(): Collection
+    public function getQuestions(): Collection
     {
-        return $this->question_id;
+        return $this->questions;
     }
 
-    public function addQuestionId(Question $questionId): self
+    public function addQuestion(Question $question): self
     {
-        if (!$this->question_id->contains($questionId)) {
-            $this->question_id[] = $questionId;
-            $questionId->addTestId($this);
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->setTestId($this->getId());
         }
 
         return $this;
     }
 
-    public function removeQuestionId(Question $questionId): self
+    public function removeQuestion(Question $question): self
     {
-        if ($this->question_id->contains($questionId)) {
-            $this->question_id->removeElement($questionId);
-            $questionId->removeTestId($this);
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
+            $question->setTestId(null);
         }
 
         return $this;
     }
+
+
 }

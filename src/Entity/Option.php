@@ -23,7 +23,7 @@ class Option
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="options")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $question_id;
 
@@ -49,12 +49,12 @@ class Option
         return $this;
     }
 
-    public function getQuestionId(): ?Question
+    public function getQuestionId()
     {
         return $this->question_id;
     }
 
-    public function setQuestionId(?Question $question_id): self
+    public function setQuestionId($question_id): self
     {
         $this->question_id = $question_id;
 
@@ -77,4 +77,5 @@ class Option
     {
       return $this->getText();
     }
+
 }
