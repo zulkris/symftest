@@ -25,7 +25,7 @@ class TestController extends AbstractController
   /**
    * @Route("/tests/fake", name="fake_tests", methods={"POST"})
    */
-  public function fakeTests() {
+public function fakeTests() {
 
 
     $option1 = new Option();
@@ -41,30 +41,40 @@ class TestController extends AbstractController
     $question = new Question();
     $question->setType('radio');
     $question->setTitle('Кто обитает на дне океана?');
+
     $option1->setQuestionId($question->getId());
     $option2->setQuestionId($question->getId());
     $option3->setQuestionId($question->getId());
     $question->addOption($option1)->addOption($option2)->addOption($option3);
-    //$option1->setQuestionId($question->getId());
-    //$option2->setQuestionId($question->getId());
-    //$option3->setQuestionId($question->getId());
-/*
-    $question2 = new Question();
-    $question2->setType('radio');
-    $question2->setTitle('У кого один рог?');
+
+
+
+
     $option11 = new Option();
     $option11->setText('Единорог');
     $option22 = new Option();
-    $option22->setText('Чебурашка');
+    $option22->setText('Кентавр');
     $option33 = new Option();
     $option33->setText('Прораб');
 
+    $question2 = new Question();
+    $question2->setType('checkbox');
+    $question2->setTitle('У кого четыре ноги?');
+
+    $option11->setQuestionId($question2->getId());
+    $option22->setQuestionId($question2->getId());
+    $option33->setQuestionId($question2->getId());
+
     $question2->addOption($option11)->addOption($option22)->addOption($option33);
-*/
+
+
+
     $test = new Test();
     $question->setTestId($test->getId());
+    $question2->setTestId($test->getId());
+
     $test->setName('Тест на знание выдуманных зверей');
-    $test->addQuestion($question);
+    $test->addQuestion($question)->addQuestion($question2);
 
     $entityManager = $this->getDoctrine()->getManager();
     $entityManager->persist($test);
